@@ -1,22 +1,35 @@
-package com.merwa_manssar.app.ws.shared.dto;
+package com.merwa_manssar.app.ws.entities;
 
 import java.io.Serializable;
 
-public class UserDto implements Serializable {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity(name = "users")
+public class UserEntity implements Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5331150269262184056L;
-
+	private static final long serialVersionUID = -5864711377497613632L;
+	@Id
+	@GeneratedValue
 	private long id;
+	@Column(nullable = false)
 	private String userId;
+	@Column(nullable = false, length = 50)
 	private String first_name;
+	@Column(nullable = false, length = 50)
 	private String last_name;
+	@Column(nullable = false, length = 120)
 	private String email;
-	private String password;
+	@Column(nullable = false)
 	private String encryptedPassword;
+	@Column(nullable = true)
 	private String emailVerificationToken;
+	@Column(nullable = false)
 	private Boolean emailVerificationStatus = false;
 
 	public long getId() {
@@ -59,14 +72,6 @@ public class UserDto implements Serializable {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getEncryptedPassword() {
 		return encryptedPassword;
 	}
@@ -83,8 +88,7 @@ public class UserDto implements Serializable {
 		this.emailVerificationToken = emailVerificationToken;
 	}
 
-	public Boolean isEmailVerificationStatus() {
-
+	public Boolean getEmailVerificationStatus() {
 		return emailVerificationStatus;
 	}
 
