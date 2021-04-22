@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.merwa_manssar.app.ws.entities.UserEntity;
 import com.merwa_manssar.app.ws.repositories.UserRepository;
 import com.merwa_manssar.app.ws.services.UserService;
+import com.merwa_manssar.app.ws.shared.Utils;
 import com.merwa_manssar.app.ws.shared.dto.UserDto;
 
 @Service
@@ -15,6 +16,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepository userRepository;
 
+	@Autowired
+	Utils utils;
+	
 	@Override
 	public UserDto createUser(UserDto userDto) {
 		UserEntity checkUser=userRepository.findByEmail(userDto.getEmail());
@@ -24,7 +28,7 @@ public class UserServiceImpl implements UserService {
 		// les valeus par defauts pour les autres attributs
 
 		userEntity.setEncryptedPassword("test password");
-		userEntity.setUserId("test userID");
+		userEntity.setUserId(utils.generateStringId(32));
 		
 		// persist
 		UserEntity usercreated = userRepository.save(userEntity);
