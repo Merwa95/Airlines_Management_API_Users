@@ -28,6 +28,7 @@ public class UserController {
 	}
 
 	@PostMapping
+	
 	public UserResponse createUser(@RequestBody UserRequest userRequest) {
 
 		UserDto userDto = new UserDto();

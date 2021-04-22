@@ -2,17 +2,19 @@ package com.merwa_manssar.app.ws.response;
 
 public class UserResponse {
 
-	private String id;
+	private String userId;
 	private String first_name;
 	private String last_name;
 	private String email;
 
-	public String getId() {
-		return id;
+	
+
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getFirst_name() {

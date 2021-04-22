@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+
 @Entity(name = "users")
 public class UserEntity implements Serializable {
 
@@ -18,13 +19,15 @@ public class UserEntity implements Serializable {
 	@GeneratedValue
 	private long id;
 	@Column(nullable = false)
-	private String userId;
+	private String userId; 
 	@Column(nullable = false, length = 50)
 	private String first_name;
 	@Column(nullable = false, length = 50)
 	private String last_name;
-	@Column(nullable = false, length = 120)
+	
+	@Column(unique=true, nullable = false, length = 120)
 	private String email;
+	
 	@Column(nullable = false)
 	private String encryptedPassword;
 	@Column(nullable = true)
