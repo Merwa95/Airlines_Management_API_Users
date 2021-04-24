@@ -2,6 +2,7 @@ package com.merwa_manssar.app.ws.services.impl;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.merwa_manssar.app.ws.entities.UserEntity;
@@ -15,6 +16,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Autowired
 	Utils utils;
@@ -23,11 +27,12 @@ public class UserServiceImpl implements UserService {
 	public UserDto createUser(UserDto userDto) {
 		UserEntity checkUser=userRepository.findByEmail(userDto.getEmail());
 		if(checkUser != null) throw new RuntimeException("USER ALREADY EXISTS");
+		
 		UserEntity userEntity = new UserEntity();
 		BeanUtils.copyProperties(userDto, userEntity);
 		// les valeus par defauts pour les autres attributs
 
-		userEntity.setEncryptedPassword("test password");
+		userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 		userEntity.setUserId(utils.generateStringId(32));
 		
 		// persist
